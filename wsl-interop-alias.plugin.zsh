@@ -33,7 +33,6 @@ CACHE_TIMESTAMP_FILE="$HOME/.cache/wsl_alias/wsl.alias.cache.timestamp"
 if [ ! -f "$CONFIG_FILE" ]; then
   log INFO "Configuration file $CONFIG_FILE does not exist. Creating default configuration file."
   mkdir -p "$(dirname "$CONFIG_FILE")"
-  mkdir -p "$(dirname "$CACHE_FILE")"
   echo "code=code" > "$CONFIG_FILE"
   echo "cmd=cmd.exe" >> "$CONFIG_FILE"
   echo "exp=explorer.exe" >> "$CONFIG_FILE"
@@ -46,6 +45,7 @@ if [ ! -f "$CACHE_TIMESTAMP_FILE" ] || [ "$CONFIG_FILE" -nt "$CACHE_TIMESTAMP_FI
   log INFO "Cache is outdated or does not exist. Regenerating cache."
 
   # Clear the cache file
+  mkdir -p "$(dirname "$CACHE_FILE")"
   echo "# Cached aliases created by xht308/wsl-interop-alias" > "$CACHE_FILE"
 
   # Iterate through each line in the configuration file and process the aliases
