@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 # Set log level (default to none). Acceptable values: NONE, INFO, DEBUG
 LOG_LEVEL=${WSL_ALIAS_LOG_LEVEL:-NONE}
