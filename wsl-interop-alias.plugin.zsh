@@ -45,6 +45,9 @@ fi
 if [ ! -f "$CACHE_TIMESTAMP_FILE" ] || [ "$CONFIG_FILE" -nt "$CACHE_TIMESTAMP_FILE" ]; then
   log INFO "Cache is outdated or does not exist. Regenerating cache."
 
+  # Clear the cache file
+  echo "# Cached aliases created by xht308/wsl-interop-alias" > "$CACHE_FILE"
+
   # Iterate through each line in the configuration file and process the aliases
   while IFS= read -r line; do
     # Skip empty lines and comments
@@ -68,7 +71,7 @@ if [ ! -f "$CACHE_TIMESTAMP_FILE" ] || [ "$CONFIG_FILE" -nt "$CACHE_TIMESTAMP_FI
     wsl_path=$(wslpath "$(echo $win_path | head -n 1)" | sed 's/ /\\ /g')
 
     # Add alias and store it in the cache file
-    echo "alias $alias_name=\"$wsl_path\"" >> "$CACHE_FILE"
+    echo "[[ ! \$(command -v $alias_name) ]] && alias $alias_name=\"$wsl_path\"" >> "$CACHE_FILE"
     log INFO "Alias added: $alias_name -> $wsl_path"
 
   done < "$CONFIG_FILE"
