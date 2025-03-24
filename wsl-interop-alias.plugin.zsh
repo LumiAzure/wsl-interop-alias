@@ -25,8 +25,8 @@ if [ -z "$WSL_DISTRO_NAME" ]; then
 fi
 
 # Define the configuration file path and cache file
-CONFIG_FILE="$HOME/.config/wsl_interop_func.conf"
-CACHE_DIR="$HOME/.cache/wsl_interop_func"
+CONFIG_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/wsl_interop_func.conf"
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/wsl_interop_func"
 CACHE_FILE="$CACHE_DIR/wsl_interop_func.cache"
 CACHE_TIMESTAMP_FILE="$CACHE_DIR/wsl_interop_func.cache.timestamp"
 FUNC_CACHE_DIR="$CACHE_DIR/functions"
